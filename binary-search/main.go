@@ -1,12 +1,28 @@
 package main
 
 import (
+	"bufio"
 	"fmt"
+	"os"
+	"strconv"
+	"strings"
 )
 
 func main() {
 	arr := []int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
-	target := 6
+	reader := bufio.NewReader(os.Stdin)
+	fmt.Print("Enter a number between 1 and 10: ")
+	targetStr, _ := reader.ReadString('\n')
+	targetStr = strings.TrimSpace(targetStr)
+	target, err := strconv.Atoi(targetStr)
+	if target > len(arr)+1 {
+		fmt.Println("Invalid input, please enter a number between 1 and 10")
+		return
+	}
+	if err != nil {
+		fmt.Println("Invalid input, please enter a number")
+		return
+	}
 	fmt.Println(myExample(arr, target))
 }
 
